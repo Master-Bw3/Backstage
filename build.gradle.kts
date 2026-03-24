@@ -6,6 +6,8 @@ plugins {
 	id("org.jetbrains.kotlin.jvm") version "2.3.10"
 }
 
+
+
 version = providers.gradleProperty("mod_version").get()
 group = providers.gradleProperty("maven_group").get()
 
@@ -19,6 +21,14 @@ repositories {
 	// Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
 	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
 	// for more information about repositories.
+	maven("https://maven.enjarai.dev/releases")
+	maven("https://maven.enjarai.dev/mirrors")
+	maven("https://repo.terradevelopment.net/repository/maven-releases")
+	maven("https://maven2.bai.lol") {
+		content {
+			includeGroup("lol.bai")
+		}
+	}
 }
 
 loom {
@@ -35,12 +45,16 @@ loom {
 dependencies {
 	// To change the versions see the gradle.properties file
 	minecraft("com.mojang:minecraft:${providers.gradleProperty("minecraft_version").get()}")
-	mappings(loom.officialMojangMappings())
+	mappings("net.fabricmc:yarn:${providers.gradleProperty("yarn_version").get()}:v2")
 	modImplementation("net.fabricmc:fabric-loader:${providers.gradleProperty("loader_version").get()}")
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation("net.fabricmc.fabric-api:fabric-api:${providers.gradleProperty("fabric_api_version").get()}")
 	modImplementation("net.fabricmc:fabric-language-kotlin:${providers.gradleProperty("fabric_kotlin_version").get()}")
+
+
+	modImplementation("dev.galacticraft:dynamicdimensions-fabric:${providers.gradleProperty("dyndims_version").get()}")
+	modImplementation("dev.enjarai:trickster:${providers.gradleProperty("trickster_version").get()}")
 }
 
 tasks.processResources {
