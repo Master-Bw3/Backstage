@@ -43,18 +43,15 @@ loom {
 }
 
 dependencies {
-	// To change the versions see the gradle.properties file
-	minecraft("com.mojang:minecraft:${providers.gradleProperty("minecraft_version").get()}")
-	mappings("net.fabricmc:yarn:${providers.gradleProperty("yarn_version").get()}:v2")
-	modImplementation("net.fabricmc:fabric-loader:${providers.gradleProperty("loader_version").get()}")
+	minecraft(libs.minecraft)
+	mappings("${libs.yarn.get()}:v2")
+	modImplementation(libs.fabric.loader)
 
-	// Fabric API. This is technically optional, but you probably want it anyway.
-	modImplementation("net.fabricmc.fabric-api:fabric-api:${providers.gradleProperty("fabric_api_version").get()}")
-	modImplementation("net.fabricmc:fabric-language-kotlin:${providers.gradleProperty("fabric_kotlin_version").get()}")
+	modImplementation(libs.fabric.api)
+	modImplementation(libs.fabric.kotlin)
 
-
-	modImplementation("dev.galacticraft:dynamicdimensions-fabric:${providers.gradleProperty("dyndims_version").get()}")
-	modImplementation("dev.enjarai:trickster:${providers.gradleProperty("trickster_version").get()}")
+	modImplementation(libs.dyndims)
+	modImplementation(libs.trickster)
 }
 
 tasks.processResources {
